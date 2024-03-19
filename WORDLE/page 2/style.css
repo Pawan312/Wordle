@@ -66,3 +66,23 @@ html, body{
     width: 7vh;
     font-size: 1.5vh;
 }
+
+@media (max-width: 600px){
+    #keyboard button{
+        width: 3vh;
+        height: 6.5vh;
+        color: white;
+        border: 1px solid #818384;
+        background-color: #818384;
+        border-radius: 5px;
+        margin-left: 0.1vh;
+        margin-bottom: 0.5vh;
+        font-size: 2vh;
+    
+    }
+
+    #keyboard .size{
+        width: 4.5vh;
+        font-size: 1.2vh;
+    }
+}
