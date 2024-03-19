@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(247, 246, 244);
+}
+
+#main{
+    height: 100vh;
+    padding: 5vh;
+    text-align: center;
+    /* background-color: rebeccapurple; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#main h1{
+    font-size: 8vh;
+    font-family: sans-serif;
+    color: rgb(151, 90, 16);
+}
+
+#main h2 {
+    font-size: 4vh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgba(3, 73, 17, 0.874);
+}
+
+#main button{
+    font-size: 3vh;
+    padding: 2vh 4vh;
+    border-radius: 8px;
+}
