@@ -82,7 +82,7 @@ btn.forEach(click => {
                     flag = 1;
                     alert('You WON');
                 }
-                if(totalWords === 6 && flag === false){
+                if(totalWords === 6 && flag === 0){
                     alert(`You LOSE, and the word is ${word}`);
                 }
 
