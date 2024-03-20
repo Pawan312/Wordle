@@ -13,10 +13,14 @@ var box = 0;
 var totalWords = 0;
 var clickCount = 0;
 
-var flag = false;
+var flag = 0;
+
+
 
 
 btn.forEach(click => {
+
+    
     click.addEventListener('click', function(){
         if(click.textContent === 'BACK'){
             if(clickCount>0){
@@ -32,14 +36,14 @@ btn.forEach(click => {
 
                 for(var i = 0; i<5 ; i++){
                     var check = word2[i];
-                    console.log(check);
+                    // console.log(check);
                     for(var j = 0; j<5 ; j++){
                         
                         if(word2[i] === word[j]){ // word2 is typed word & word is generated word.
                             if(i === j){
-                                console.log('green');
+                                // console.log('green');
                                 let countb1 =  i+(5*totalWords);
-                                console.log(countb1);
+                                // console.log(countb1);
                                 
                                 // var colorbutton = cha[countb1];
                                 cha[countb1].style.backgroundColor = 'green';
@@ -47,12 +51,21 @@ btn.forEach(click => {
                                 greenflag++;
                                 break;
                             }else{
-                                console.log('yellow');
-                                var color = cha[i+(5*totalWords)];
-                                console.log(color);
-                                color.style.backgroundColor = 'yellow';
-                                color.style.color = 'red';
-                                break;
+                                if(word2[i] === word[i]){
+                                    // console.log('green');
+                                    var color = cha[i+(5*totalWords)];
+                                    // console.log(color);
+                                    color.style.backgroundColor = 'green';
+                                    greenflag++;
+                                    break;
+                                }else{
+                                    // console.log('yellow');
+                                    var color = cha[i+(5*totalWords)];
+                                    // console.log(color);
+                                    color.style.backgroundColor = 'yellow';
+                                    color.style.color = 'red';
+                                    break;
+                                }
                             }
                         }else{
                             var colorbutton2 = cha[i+(5*totalWords)];
@@ -63,10 +76,10 @@ btn.forEach(click => {
                 word2 = '';
                 totalWords++;
                 clickCount = 0; 
-                console.log(totalWords);
+                // console.log(totalWords);
 
                 if(greenflag === 5){
-                    flag = true;
+                    flag = 1;
                     alert('You WON');
                 }
                 if(totalWords === 6 && flag === false){
@@ -77,16 +90,25 @@ btn.forEach(click => {
                 alert('write word of 5 length');
             }       
         }else{
-            if(clickCount < 5){
-                word2 += click.textContent;
-                cha[box].textContent = click.textContent;
-                box++;
-                clickCount++;
+
+            if(totalWords === 6 ){
+                // console.log('word completion');
+                alert(`You LOSE and word is ${word}`);
+            }else if(flag === 1){
+                // console.log('pawan inside flag');
+                alert('You Won');
+            }else{
+                if(clickCount < 5){
+                    word2 += click.textContent;
+                    cha[box].textContent = click.textContent;
+                    box++;
+                    clickCount++;
+                }
             }
         }
     })
     
 })
 
-console.log(totalWords);
+// console.log(totalWords);
 
