@@ -1,6 +1,7 @@
 var cha = document.querySelectorAll('#wordSegmant button');
 var btn = document.querySelectorAll('#keyboard button');
 var show = document.querySelector('.text');
+var helpbtn = document.querySelector('.help button');
 
 
 // var arr =['which', 'there', 'their', 'about', 'would', 'these', 'other', 'words', 'could', 'write', 'first', 'water', 'after', 'where', 'right', 'think', 'three', 'years', 'place', 'sound'];
@@ -13,7 +14,7 @@ const getWord = async () => {
     var jsongettingWord = await gettingWord.json();
 
     console.log(jsongettingWord[0]);
-    word = jsongettingWord[0].toUpperCase();;
+    word = jsongettingWord[0].toUpperCase();
     console.log(word);
 };
 
@@ -24,7 +25,40 @@ Promise.resolve(getWord()).then(() => {
         let data = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${generatedWord}`);
         let jsonData = await data.json();
 
+        let drop = function(){
+            let helper = document.createElement('div');
+            // div.classList.add('details2');
+            helper.innerHTML = `<p>Meaning : <span>${jsonData[0].meanings[0].definitions[0].definition}</span></p>
+            <p>Synonyms : <span>${jsonData[0].meanings[0].synonyms}</span></p>
+            `;
+
+            document.querySelector('.help').appendChild(helper);
+        }
+        
+        let oneclick = 0;
+        // drop();
+
+        helpbtn.addEventListener('click', function() {
+            // drop();
+            if(oneclick===0){
+                drop();
+                helpbtn.textContent = 'Close'
+                oneclick = 1;
+            }else if(oneclick === 1){
+                helpbtn.textContent = 'Help'
+                var helpbtn2 = document.querySelector('.help div');
+                helpbtn2.style.display = 'none';
+                oneclick = 2;
+            }else{
+                helpbtn.textContent = 'Close'
+                var helpbtn2 = document.querySelector('.help div');
+                helpbtn2.style.display = 'block';
+                oneclick = 1;
+            }
+        })
+
         let maker = function () {
+
             let div = document.createElement('div');
             div.classList.add('details');
             div.innerHTML = `
