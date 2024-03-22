@@ -44,6 +44,25 @@ html, body{
     font-weight: 600;
 }
 
+.help{
+    padding: 1vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80vh;
+    /* background-color: rgb(169, 150, 9); */
+    margin-bottom: 1vh;
+    margin-top: -2vh;
+}
+.help button{
+    padding: 0.5vh 1vh;
+    border-radius: 4px;
+    background-color: #990011;
+    color: honeydew;
+
+}
+
 #keyboard{
     display: flex;
     flex-direction: column;
@@ -91,7 +110,7 @@ html, body{
 @media (max-width: 600px){
     #keyboard{
         width: 100vw;
-        margin-top: 3vw;
+        margin-top: 2vw;
     }
     #keyboard button{
         width: 8.5vw;
@@ -113,5 +132,16 @@ html, body{
 
     #main .text{
         width: 100vw;
+    }
+
+    .help{
+        width: 100vw;
+    }
+    .help button{
+        padding: 0.5vh 1vh;
+        border-radius: 4px;
+        background-color: #990011;
+        color: honeydew;
+    
     }
 }
