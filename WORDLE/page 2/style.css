@@ -110,4 +110,8 @@ html, body{
         width: 13vw;
         font-size: 3.5vw;
     }
+
+    #main .text{
+        width: 100vw;
+    }
 }
