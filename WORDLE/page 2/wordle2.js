@@ -1,5 +1,6 @@
 var cha = document.querySelectorAll('#wordSegmant button');
 var btn = document.querySelectorAll('#keyboard button');
+var show = document.querySelector('.text');
 
 
 // var arr =['which', 'there', 'their', 'about', 'would', 'these', 'other', 'words', 'could', 'write', 'first', 'water', 'after', 'where', 'right', 'think', 'three', 'years', 'place', 'sound'];
@@ -22,6 +23,23 @@ Promise.resolve(getWord()).then(() => {
     const getData = async (generatedWord) => {
         let data = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${generatedWord}`);
         let jsonData = await data.json();
+
+        let maker = function () {
+            let div = document.createElement('div');
+            div.classList.add('details');
+            div.innerHTML = `
+                        <h2>Word : <span>${jsonData[0].word.toUpperCase()}</span></h2>
+                        <p>Part Of Speech : <span>${jsonData[0].meanings[0].partOfSpeech}</span></p>
+                        <p>Meaning : <span>${jsonData[0].meanings[0].definitions[0].definition}</span></p>
+                        <p>Example : <span>${jsonData[0].meanings[0].definitions[0].example}</span></p>
+                        <p>Synonyms : <span>${jsonData[0].meanings[0].synonyms}</span></p>
+                    `
+
+            document.querySelector('.text').appendChild(div);
+        }
+
+        maker();
+
 
 
         console.log(jsonData);
@@ -109,26 +127,32 @@ Promise.resolve(getWord()).then(() => {
 
                     if (greenflag === 5) {
                         flag = 1;
+                        show.style.display = 'inline';
                         alert('You WON');
+                        
                     }
                     if (totalWords === 6 && flag === 0) {
+                        show.style.display = 'inline';
                         alert(`You LOSE, and the word is ${word}`);
                     }
 
                 } else {
-                    if(totalWords !== 6){
+                    if (totalWords !== 6) {
                         alert('write word of 5 length');
                     }
-                    
+
                 }
             } else {
 
                 if (totalWords === 6 && flag === 0) {
                     // console.log('word completion');
+                    show.style.display = 'inline';
                     alert(`You LOSE and word is ${word}`);
                 } else if (flag === 1) {
                     // console.log('pawan inside flag');
+                    show.style.display = 'inline';
                     alert('You Won');
+                    
                 } else {
                     if (clickCount < 5) {
                         word2 += click.textContent;
