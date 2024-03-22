@@ -25,7 +25,7 @@ Promise.resolve(getWord()).then(() => {
         let data = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${generatedWord}`);
         let jsonData = await data.json();
 
-        let drop = function(){
+        let drop = function () {
             let helper = document.createElement('div');
             // div.classList.add('details2');
             helper.innerHTML = `<p>Meaning : <span>${jsonData[0].meanings[0].definitions[0].definition}</span></p>
@@ -34,22 +34,22 @@ Promise.resolve(getWord()).then(() => {
 
             document.querySelector('.help').appendChild(helper);
         }
-        
+
         let oneclick = 0;
         // drop();
 
-        helpbtn.addEventListener('click', function() {
+        helpbtn.addEventListener('click', function () {
             // drop();
-            if(oneclick===0){
+            if (oneclick === 0) {
                 drop();
                 helpbtn.textContent = 'Close'
                 oneclick = 1;
-            }else if(oneclick === 1){
+            } else if (oneclick === 1) {
                 helpbtn.textContent = 'Help'
                 var helpbtn2 = document.querySelector('.help div');
                 helpbtn2.style.display = 'none';
                 oneclick = 2;
-            }else{
+            } else {
                 helpbtn.textContent = 'Close'
                 var helpbtn2 = document.querySelector('.help div');
                 helpbtn2.style.display = 'block';
@@ -115,91 +115,120 @@ Promise.resolve(getWord()).then(() => {
                     // console.log(word2.toLowerCase());
 
                     // word2 = word2.toLowerCase();
-                    let word3;
+                    let word3 = null;
 
-                    const right = async ()=> {
+                    const right = async () => {
                         // console.log('pankaj');
-                        console.log(word2);
-                        let dataCheck = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word2}`);
-                        let jsondataCheck = await dataCheck.json();
-                        // console.log('pawan');
-                        console.log(jsondataCheck[0].word);
-                        word3 = jsondataCheck[0].word;
+                        try {
+                            console.log(word2);
+                            let dataCheck = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word2}`);
+                            console.log(dataCheck);
+                            let jsondataCheck = await dataCheck.json();
+                            // console.log('pawan');
 
-                        if(word2 === jsondataCheck[0].word){
-                            console.log('true');
+                            // console.log(jsondataCheck);
+
+                            let status = dataCheck.status;
+                            console.log(status);
+
+                            if (status === 404) {
+                                alert('Please Enter Valid Word');
+                            } else {
+                                console.log(jsondataCheck);
+
+                                console.log(jsondataCheck[0].word);
+                                word3 = jsondataCheck[0].word;
+
+                                if (word2 === jsondataCheck[0].word) {
+                                    console.log('true');
+                                }
+                            }
+
+                        } catch (error) {
+                            console.log(error);
                         }
+
                     }
+                    
+                    
 
                     Promise.resolve(right()).then(() => {
-                        
-                        word3 = word3.toUpperCase();
-                        if(word2 === word3){
-                            var greenflag = 0;
 
-                            for (var i = 0; i < 5; i++) {
-                                var check = word2[i];
-                                // console.log(check);
-                                for (var j = 0; j < 5; j++) {
 
-                                    if (word2[i] === word[j]) { // word2 is typed word & word is generated word.
-                                        if (i === j) {
-                                            // console.log('green');
-                                            let countb1 = i + (5 * totalWords);
-                                            // console.log(countb1);
+                        if (word3 !== null) {
+                            word3 = word3.toUpperCase();
+                            if (word2 === word3) {
+                                var greenflag = 0;
 
-                                            // var colorbutton = cha[countb1];
-                                            cha[countb1].style.backgroundColor = 'green';
+                                for (var i = 0; i < 5; i++) {
+                                    var check = word2[i];
+                                    // console.log(check);
+                                    for (var j = 0; j < 5; j++) {
 
-                                            greenflag++;
-                                            break;
-                                        } else {
-                                            if (word2[i] === word[i]) {
+                                        if (word2[i] === word[j]) { // word2 is typed word & word is generated word.
+                                            if (i === j) {
                                                 // console.log('green');
-                                                var color = cha[i + (5 * totalWords)];
-                                                // console.log(color);
-                                                color.style.backgroundColor = 'green';
+                                                let countb1 = i + (5 * totalWords);
+                                                // console.log(countb1);
+
+                                                // var colorbutton = cha[countb1];
+                                                cha[countb1].style.backgroundColor = 'green';
+
                                                 greenflag++;
                                                 break;
                                             } else {
-                                                // console.log('yellow');
-                                                var color = cha[i + (5 * totalWords)];
-                                                // console.log(color);
-                                                color.style.backgroundColor = 'yellow';
-                                                color.style.color = 'red';
-                                                break;
+                                                if (word2[i] === word[i]) {
+                                                    // console.log('green');
+                                                    var color = cha[i + (5 * totalWords)];
+                                                    // console.log(color);
+                                                    color.style.backgroundColor = 'green';
+                                                    greenflag++;
+                                                    break;
+                                                } else {
+                                                    // console.log('yellow');
+                                                    var color = cha[i + (5 * totalWords)];
+                                                    // console.log(color);
+                                                    color.style.backgroundColor = 'yellow';
+                                                    color.style.color = 'red';
+                                                    break;
+                                                }
                                             }
+                                        } else {
+                                            var colorbutton2 = cha[i + (5 * totalWords)];
+                                            colorbutton2.style.backgroundColor = 'grey';
                                         }
-                                    } else {
-                                        var colorbutton2 = cha[i + (5 * totalWords)];
-                                        colorbutton2.style.backgroundColor = 'grey';
                                     }
                                 }
-                            }
-                            word2 = '';
-                            totalWords++;
-                            clickCount = 0;
-                            // console.log(totalWords);
+                                word2 = '';
+                                totalWords++;
+                                clickCount = 0;
+                                // console.log(totalWords);
 
-                            if (greenflag === 5) {
-                                flag = 1;
-                                show.style.display = 'inline';
-                                alert('You WON');
-                                
-                            }
-                            if (totalWords === 6 && flag === 0) {
-                                show.style.display = 'inline';
-                                alert(`You LOSE, and the word is ${word}`);
-                            }
+                                if (greenflag === 5) {
+                                    flag = 1;
+                                    show.style.display = 'inline';
+                                    alert('You WON');
 
-                        }else{
-                            alert('Write Correct Word');
+                                }
+                                if (totalWords === 6 && flag === 0) {
+                                    show.style.display = 'inline';
+                                    alert(`You LOSE, and the word is ${word}`);
+                                }
+
+                            } else {
+                                alert('Write Correct Word');
+                            }
                         }
 
                     });
+                    
+
+
+
+
 
                 } else {
-                    if (totalWords !== 6 && flag ==0) {
+                    if (totalWords !== 6 && flag == 0) {
                         alert('write word of 5 length');
                     }
 
@@ -214,7 +243,7 @@ Promise.resolve(getWord()).then(() => {
                     // console.log('pawan inside flag');
                     show.style.display = 'inline';
                     alert('You Won');
-                    
+
                 } else {
                     if (clickCount < 5) {
                         word2 += click.textContent;
