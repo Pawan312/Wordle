@@ -175,6 +175,16 @@ Promise.resolve(getWord()).then(() => {
                                                 cha[countb1].style.backgroundColor = 'green';
 
                                                 greenflag++;
+
+                                                //keyboard;
+                                                for(var k = 0; k<btn.length; k++){
+                                                    if(word2[i] === btn[k].textContent){
+                                                        btn[k].style.backgroundColor = 'green';
+                                                        break;
+                                                    }
+                                                }
+                                                
+                                                
                                                 break;
                                             } else {
                                                 if (word2[i] === word[i]) {
@@ -183,19 +193,47 @@ Promise.resolve(getWord()).then(() => {
                                                     // console.log(color);
                                                     color.style.backgroundColor = 'green';
                                                     greenflag++;
+
+                                                    //keyboard;
+                                                    for(var k = 0; k<btn.length; k++){
+                                                        if(word2[i] === btn[k].textContent){
+                                                            btn[k].style.backgroundColor = 'green';
+                                                            break;
+                                                        }
+                                                    }
+
+                                                    
                                                     break;
                                                 } else {
                                                     // console.log('yellow');
                                                     var color = cha[i + (5 * totalWords)];
                                                     // console.log(color);
-                                                    color.style.backgroundColor = 'yellow';
-                                                    color.style.color = 'red';
+                                                    color.style.backgroundColor = '#b59f3b';
+                                                    // color.style.color = 'red';
+
+                                                    //keyboard;
+                                                    for(var k = 0; k<btn.length; k++){
+                                                        if(word2[i] === btn[k].textContent){
+                                                            btn[k].style.backgroundColor = '#b59f3b';
+                                                            break;
+                                                        }
+                                                    }
+                                                    
                                                     break;
                                                 }
                                             }
                                         } else {
                                             var colorbutton2 = cha[i + (5 * totalWords)];
-                                            colorbutton2.style.backgroundColor = 'grey';
+                                            colorbutton2.style.backgroundColor = '#303030';
+
+
+                                            //keyboard;
+                                            for(var k = 0; k<btn.length; k++){
+                                                if(word2[i] === btn[k].textContent){
+                                                    btn[k].style.backgroundColor = '#303030';
+                                                    break;
+                                                }
+                                            }
                                         }
                                     }
                                 }
