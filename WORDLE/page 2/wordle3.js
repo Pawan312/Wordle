@@ -45,7 +45,7 @@ Promise.resolve(getWord()).then(() => {
                 helpbtn.textContent = 'Close'
                 oneclick = 1;
             } else if (oneclick === 1) {
-                helpbtn.textContent = 'Help'
+                helpbtn.textContent = 'Hint'
                 var helpbtn2 = document.querySelector('.help div');
                 helpbtn2.style.display = 'none';
                 oneclick = 2;
